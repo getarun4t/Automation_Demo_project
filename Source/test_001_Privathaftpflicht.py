@@ -43,7 +43,7 @@ def click_einverstandnis():
 
 @when('select a choice in "Versichern" Page')
 def select_versichern():
-    wait_and_click(By.XPATH, Versichern.mich_alleine)
+    wait_and_click(By.XPATH, Versichern.mich_alleine)                                   #randint method may be used to select random choices here during each execution
     wait_if_displayed(Aufgeführten.beschaftigt, Weiter.weiter, 2)
 
 
@@ -77,7 +77,7 @@ def zum_angebote():
 @when('click on ""Jetzt abschließen" button')
 def angebote():
     wait_for(By.XPATH, Angebotes.selected_plan)
-    global plan
+    global plan                                                                                 #copying the selected plan to verify in the dashboard
     plan = driver.find_element_by_xpath(Angebotes.selected_plan).text
     wait_and_click(By.XPATH, Angebotes.jetzt_abschlieben)
     wait_if_displayed(Sichern.email_password, Angebotes.jetzt_abschlieben, 2)
@@ -119,7 +119,7 @@ def zahlungsdaten():
 @when("proceed from the Angaben-Übersicht Page")
 def Angaben():
     wait_for(By.XPATH, Angaben_Ubersicht.check)
-    driver.find_element_by_xpath(Angaben_Ubersicht.check).location_once_scrolled_into_view
+    driver.find_element_by_xpath(Angaben_Ubersicht.check).location_once_scrolled_into_view              #to scroll the checkbox into view
     driver.find_element_by_xpath(Angaben_Ubersicht.check).click()
     wait_and_click(By.XPATH, Angaben_Ubersicht.jetzt_verbindlich_kaufen)
     wait_if_displayed(Bestellung.zuruck_zur_ubersicht, Angaben_Ubersicht.jetzt_verbindlich_kaufen, 5)
@@ -142,8 +142,8 @@ def gefallt():
 def plan_check():
     wait_for(By.XPATH, Dashboard.plan_name)
     plan_dashboard = driver.find_element_by_xpath(Dashboard.plan_name).text
-    assert plan == plan_dashboard
+    assert plan == plan_dashboard                                                           #asserting the selected plan
 
 def wait_and_click(type, locator):
-    wait_for(type, locator)
-    driver.find_element_by_xpath(locator).click()
+    wait_for(type, locator)                                                                 #custom method to wait for an element and click
+    driver.find_element_by_xpath(locator).click()                                           #the method can be implemented in the conftest.py file as well
