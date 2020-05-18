@@ -118,10 +118,12 @@ def zahlungsdaten():
 
 @when("proceed from the Angaben-Übersicht Page")
 def Angaben():
+    wait_for(By.XPATH, Angaben_Ubersicht.check)
     driver.find_element_by_xpath(Angaben_Ubersicht.check).location_once_scrolled_into_view
     driver.find_element_by_xpath(Angaben_Ubersicht.check).click()
     wait_and_click(By.XPATH, Angaben_Ubersicht.jetzt_verbindlich_kaufen)
-    wait_if_displayed(Bestellung.zuruck_zur_ubersicht, Angaben_Ubersicht.jetzt_verbindlich_kaufen, 2)
+    wait_if_displayed(Bestellung.zuruck_zur_ubersicht, Angaben_Ubersicht.jetzt_verbindlich_kaufen, 5)
+    wait_till_element_disappears(Angaben_Ubersicht.jetzt_verbindlich_kaufen)
 
 
 @when("proceed fromm the Bestellung abgeschlossen Page")
